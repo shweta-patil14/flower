@@ -1,0 +1,6 @@
+{
+  "name": "Swaraj Florist 'N' Flower Decorators",
+  "description": "Bespoke floral arrangements, luxury flower decor, crystal vases, and same-day delivery by Swaraj Florist 'N' Flower Decorators.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

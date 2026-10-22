@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bloom &amp; Box | Luxury Botanical Gifting &amp; Floral Atelier</title>
+<meta content="Bloom &amp; Box - Bespoke floral arrangements, luxury boxed roses, crystal vases, and same-day boutique delivery." name="description"/>
+<meta content="Bloom &amp; Box | Luxury Atelier Botanique" property="og:title"/>
+<meta content="Poetry in a box. Curated artisanal floral arrangements delivered with timeless elegance." property="og:description"/>
+<meta content="website" property="og:type"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;family=Montserrat:wght@200;300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#1a1a1a',
+              accent: '#C49A82', /* Dusty Rose / Muted Terra */
+              gold: '#C5A059',
+              border: '#e5e5e5',
+              surface: '#faf9f7',
+              muted: '#767676'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Cormorant Garamond', 'serif'],
+            sans: ['Montserrat', 'Inter', 'sans-serif'],
+            cormorant: ['"Cormorant Garamond"', 'serif']
+          },
+          letterSpacing: {
+            widest2: '0.22em',
+            luxury: '0.18em'
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    :root {
+      --brand-dark: #1a1a1a;
+      --brand-border: #e5e5e5;
+      --brand-surface: #faf9f7;
+      --brand-accent: #C49A82;
+      --brand-gold: #C5A059;
+    }
+    body {
+      color: var(--brand-dark);
+      background-color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-serif-luxury {
+      font-family: 'Playfair Display', serif;
+    }
+    .btn-luxury {
+      border: 1px solid #1a1a1a;
+      background: transparent;
+      color: #1a1a1a;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      padding: 0.85rem 1.75rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .btn-luxury:hover {
+      background: #1a1a1a;
+      color: #ffffff;
+    }
+    .btn-luxury-inverted {
+      border: 1px solid #ffffff;
+      background: #ffffff;
+      color: #1a1a1a;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      padding: 0.85rem 1.75rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-luxury-inverted:hover {
+      background: transparent;
+      color: #ffffff;
+    }
+    /* Smooth Scrollbar & Drawer Transitions */
+    .drawer-overlay {
+      transition: opacity 0.35s ease-in-out;
+    }
+    .drawer-panel {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Mega menu dropdown hover delay */
+    .nav-item-dropdown:hover .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .mega-menu {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(8px);
+    }
+    /* Product card image hover effect */
+    .product-img-box {
+      aspect-ratio: 4/5;
+    }
+    .product-img-box img.primary-img {
+      transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .product-img-box img.secondary-img {
+      opacity: 0;
+      transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .product-card:hover .product-img-box img.primary-img {
+      opacity: 0;
+      transform: scale(1.04);
+    }
+    .product-card:hover .product-img-box img.secondary-img {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+    /* Pulse for hotspots */
+    @keyframes subtle-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.95; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+    }
+    .hotspot-ring {
+      animation: subtle-pulse 2.2s infinite ease-in-out;
+    }
+    /* Custom Hide scrollbars */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen flex flex-col">
+<!-- ========================================================
+       REACT STATE & CONFIG SIMULATION (Next.js Local Data Layer)
+       ======================================================== -->
+<script>
+    // Product Database (20+ Seed Items)
+    window.STORE_DATA = {
+      brandName: "Bloom & Box",
+      rates: {
+        INR: { symbol: "Rs. ", factor: 1 },
+        USD: { symbol: "$", factor: 0.012 },
+        CAD: { symbol: "CA$", factor: 0.016 },
+        EUR: { symbol: "€", factor: 0.011 },
+        GBP: { symbol: "£", factor: 0.0095 }
+      },
+      currentCurrency: "INR",
+      cart: [
+        {
+          id: "prod-1",
+          name: "Wild Mix – Classic Cubo",
+          priceINR: 2800,
+          qty: 1,
+          size: "Classic",
+          image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=700&q=80"
+        }
+      ],
+      products: [
+        { id: "p1", name: "Wild Mix – Classic Cubo", price: 2800, category: "bestseller", tag: "Signature", img1: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=700&q=80", img2: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=700&q=80" },
+        { id: "p2", name: "Vibrant – Grande Ronde", price: 3400, category: "bestseller", tag: "Seasonal", img1: "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=700&q=80", img2: "https://images.unsplash.com/photo-1533616688419-b7a585564566?auto=format&fit=crop&w=700&q=80" },
+        { id: "p3", name: "Ivory Whisper – Classic Ronde", price: 2500, category: "bestseller", tag: "Best Seller", img1: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=700&q=80", img2: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=700&q=80" },
+        { id: "p4", name: "Ruby Opulence – Crystal Grande", price: 4200, category: "bestseller", tag: "Luxury", img1: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80", img2: "https://images.unsplash.com/photo-1527061011665-3652c757a4d4?auto=format&fit=crop&w=700&q=80" },
+        { id: "p5", name: "Pastel Serenade – Petite Cubo", price: 2200, category: "bestseller", tag: "New", img1: "https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=700&q=80", img2: "https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=700&q=80" },
+        { id: "p6", name: "Noir Velvet – Obsidian Ronde", price: 3800, category: "bestseller", tag: "Artisanal", img1: "https://images.unsplash.com/photo-1559563458-527698bf5295?auto=format&fit=crop&w=700&q=80", img2: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=700&q=80" },
+        { id: "p7", name: "Golden Sunset – Classic Cubo", price: 3100, category: "bestseller", tag: "Celebration", img1: "https://images.unsplash.com/photo-1507290439931-a861b5a38200?auto=format&fit=crop&w=700&q=80", img2: "https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=700&q=80" },
+        { id: "p8", name: "Monochrome Rose – Crystal Grande", price: 4500, category: "bestseller", tag: "Exclusive", img1: "https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=700&q=80", img2: "https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?auto=format&fit=crop&w=700&q=80" },
+        
+        // Add-ons
+        { id: "a1", name: "Artisan Dipped Truffles", price: 950, category: "addon", tag: "Gourmet", img1: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=700&q=80", img2: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=700&q=80" },
+        { id: "a2", name: "Amber Noir Soy Candle", price: 1200, category: "addon", tag: "Aroma", img1: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=700&q=80", img2: "https://images.unsplash.com/photo-1508746829417-e6f548d8d6ed?auto=format&fit=crop&w=700&q=80" },
+        { id: "a3", name: "Letterpress Foil Greeting Note", price: 450, category: "addon", tag: "Bespoke", img1: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=700&q=80", img2: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=700&q=80" },
+        { id: "a4", name: "Muted Clay Fluted Mini Vase", price: 1650, category: "addon", tag: "Ceramic", img1: "https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&w=700&q=80", img2: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=700&q=80" }
+      ]
+    };
+
+    function formatPrice(amountINR) {
+      const curr = window.STORE_DATA.currentCurrency;
+      const rate = window.STORE_DATA.rates[curr];
+      const converted = Math.round(amountINR * rate.factor);
+      return `${rate.symbol}${converted.toLocaleString()}`;
+    }
+
+    function updateCurrencyDisplay() {
+      document.querySelectorAll('[data-inr-price]').forEach(el => {
+        const inr = parseFloat(el.getAttribute('data-inr-price'));
+        const prefix = el.getAttribute('data-price-prefix') || '';
+        el.textContent = `${prefix}${formatPrice(inr)}`;
+      });
+      renderCartItems();
+    }
+
+    function toggleCart(open) {
+      const drawer = document.getElementById('cart-drawer');
+      const backdrop = document.getElementById('cart-backdrop');
+      const panel = document.getElementById('cart-panel');
+      if (open) {
+        drawer.classList.remove('pointer-events-none');
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+        panel.classList.remove('translate-x-full');
+        panel.classList.add('translate-x-0');
+      } else {
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
+        panel.classList.remove('translate-x-0');
+        panel.classList.add('translate-x-full');
+        setTimeout(() => drawer.classList.add('pointer-events-none'), 350);
+      }
+    }
+
+    function toggleMobileMenu(open) {
+      const drawer = document.getElementById('mobile-drawer');
+      const backdrop = document.getElementById('mobile-backdrop');
+      const panel = document.getElementById('mobile-panel');
+      if (open) {
+        drawer.classList.remove('pointer-events-none');
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+        panel.classList.remove('-translate-x-full');
+        panel.classList.add('translate-x-0');
+      } else {
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
+        panel.classList.remove('translate-x-0');
+        panel.classList.add('-translate-x-full');
+        setTimeout(() => drawer.classList.add('pointer-events-none'), 350);
+      }
+    }
+
+    function toggleSearchModal(open) {
+      const modal = document.getElementById('search-modal');
+      if (open) {
+        modal.classList.remove('hidden');
+        setTimeout(() => document.getElementById('search-input').focus(), 50);
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function renderCartItems() {
+      const container = document.getElementById('cart-items-container');
+      const emptyState = document.getElementById('cart-empty-state');
+      const cartFooter = document.getElementById('cart-footer');
+      const cartCountBadges = document.querySelectorAll('.cart-count-badge');
+      const subtotalEl = document.getElementById('cart-subtotal-val');
+
+      const count = window.STORE_DATA.cart.reduce((sum, item) => sum + item.qty, 0);
+      cartCountBadges.forEach(b => b.textContent = count);
+
+      if (window.STORE_DATA.cart.length === 0) {
+        emptyState.classList.remove('hidden');
+        cartFooter.classList.add('hidden');
+        container.innerHTML = '';
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      cartFooter.classList.remove('hidden');
+
+      let subtotalINR = 0;
+      container.innerHTML = window.STORE_DATA.cart.map((item, idx) => {
+        subtotalINR += item.priceINR * item.qty;
+        return `
+          <div class="flex gap-4 py-4 border-b border-brand-border">
+            <img src="${item.image}" alt="${item.name}" class="w-20 h-24 object-cover border border-brand-border" />
+            <div class="flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-start">
+                  <h4 class="font-serif text-sm text-brand-dark">${item.name}</h4>
+                  <button onclick="removeFromCart(${idx})" class="text-xs text-brand-muted hover:text-black">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                  </button>
+                </div>
+                <p class="text-[11px] uppercase tracking-wider text-brand-muted mt-0.5">Size: ${item.size}</p>
+                <p class="text-xs font-medium text-brand-dark mt-1">${formatPrice(item.priceINR)}</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="flex items-center border border-brand-border">
+                  <button onclick="adjustCartQty(${idx}, -1)" class="w-6 h-6 flex items-center justify-center text-xs hover:bg-neutral-100">-</button>
+                  <span class="w-8 text-center text-xs">${item.qty}</span>
+                  <button onclick="adjustCartQty(${idx}, 1)" class="w-6 h-6 flex items-center justify-center text-xs hover:bg-neutral-100">+</button>
+                </div>
+                <span class="text-xs text-brand-muted">${formatPrice(item.priceINR * item.qty)}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      subtotalEl.textContent = formatPrice(subtotalINR);
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function addToCart(prodId) {
+      const prod = window.STORE_DATA.products.find(p => p.id === prodId);
+      if (!prod) return;
+      const existing = window.STORE_DATA.cart.find(item => item.id === prodId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        window.STORE_DATA.cart.push({
+          id: prod.id,
+          name: prod.name,
+          priceINR: prod.price,
+          qty: 1,
+          size: "Classic",
+          image: prod.img1
+        });
+      }
+      renderCartItems();
+      toggleCart(true);
+    }
+
+    function removeFromCart(index) {
+      window.STORE_DATA.cart.splice(index, 1);
+      renderCartItems();
+    }
+
+    function adjustCartQty(index, delta) {
+      const item = window.STORE_DATA.cart[index];
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        window.STORE_DATA.cart.splice(index, 1);
+      }
+      renderCartItems();
+    }
+  </script>
+<!-- ========================================================
+       STICKY HEADER WITH SLIM TOP BAR & MEGA DROPDOWNS
+       ======================================================== -->
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-brand-border transition-all duration-200">
+<!-- 1. Slim Top Bar -->
+<div class="border-b border-brand-border/60 py-1.5 px-4 sm:px-8 text-[11px] tracking-wider text-brand-muted">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<!-- Social Icons Left -->
+<div class="flex items-center space-x-4">
+<a aria-label="Facebook" class="hover:text-brand-dark transition-colors flex items-center gap-1.5" href="#">
+<i class="w-3.5 h-3.5" data-lucide="facebook"></i>
+<span class="hidden md:inline text-[10px] tracking-widest uppercase">Facebook</span>
+</a>
+<a aria-label="Instagram" class="hover:text-brand-dark transition-colors flex items-center gap-1.5" href="#">
+<i class="w-3.5 h-3.5" data-lucide="instagram"></i>
+<span class="hidden md:inline text-[10px] tracking-widest uppercase">Instagram</span>
+</a>
+<span class="hidden lg:inline-block text-neutral-300">|</span>
+<span class="hidden lg:inline-block text-[10px] uppercase tracking-widest2 text-neutral-400">Atelier Botanique • Same Day Delivery</span>
+</div>
+<!-- Center Notice for Mobile & Desktop -->
+<div class="text-center font-normal tracking-luxury text-[10px] uppercase text-neutral-600">
+          Complimentary Luxury Hand-Calligraphed Note Card
+        </div>
+<!-- Currency Dropdown Right -->
+<div class="relative flex items-center gap-2">
+<span class="text-[10px] uppercase tracking-wider text-neutral-400 hidden sm:inline">Currency:</span>
+<select class="bg-transparent text-[11px] font-medium tracking-wider text-brand-dark uppercase border-none focus:outline-none cursor-pointer pr-1" id="currency-select">
+<option value="INR">INR (₹)</option>
+<option value="USD">USD ($)</option>
+<option value="CAD">CAD (CA$)</option>
+<option value="EUR">EUR (€)</option>
+<option value="GBP">GBP (£)</option>
+</select>
+</div>
+</div>
+</div>
+<!-- 2. Main Bar: Logo & Actions -->
+<div class="px-4 sm:px-8 py-3.5 max-w-7xl mx-auto flex items-center justify-between">
+<!-- Mobile Hamburger Button -->
+<button aria-label="Open Navigation Menu" class="lg:hidden p-1.5 -ml-1 text-brand-dark focus:outline-none" onclick="toggleMobileMenu(true)">
+<i class="w-5 h-5 stroke-[1.5]" data-lucide="menu"></i>
+</button>
+<!-- Left spacer for desktop symmetry -->
+<div class="hidden lg:flex w-36 items-center text-xs tracking-widest2 uppercase text-neutral-500">
+<span>Curated Blooms</span>
+</div>
+<!-- Centered Logo / Wordmark -->
+<a class="text-center group block" href="#">
+<h1 class="font-serif text-2xl sm:text-3xl tracking-[0.2em] font-normal uppercase text-brand-dark group-hover:opacity-90 transition-opacity">
+          Bloom &amp; Box
+        </h1>
+<p class="text-[8px] sm:text-[9px] tracking-[0.38em] font-light text-neutral-400 uppercase -mt-0.5">
+          Atelier Botanique
+        </p>
+</a>
+<!-- Right Utility Icons: Account, Search, Cart -->
+<div class="flex items-center space-x-5 sm:space-x-6 text-brand-dark w-auto lg:w-36 justify-end">
+<!-- Account -->
+<a class="hover:text-brand-accent transition-colors" href="#account" onclick="alert('Account Portal: Secure login and order management.')" title="Account">
+<i class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.4]" data-lucide="user"></i>
+</a>
+<!-- Search -->
+<button class="hover:text-brand-accent transition-colors" onclick="toggleSearchModal(true)" title="Search Collections">
+<i class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.4]" data-lucide="search"></i>
+</button>
+<!-- Cart with Badge -->
+<button class="relative hover:text-brand-accent transition-colors flex items-center" onclick="toggleCart(true)" title="Shopping Cart">
+<i class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.4]" data-lucide="shopping-bag"></i>
+<span class="cart-count-badge absolute -top-1.5 -right-2 bg-brand-dark text-white text-[9px] font-medium w-4 h-4 rounded-full flex items-center justify-center">1</span>
+</button>
+</div>
+</div>
+<!-- 3. Desktop Main Navigation with Hover Mega-Dropdowns -->
+<nav class="hidden lg:block border-t border-brand-border/70 py-2.5">
+<ul class="flex items-center justify-center space-x-10 text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-700">
+<!-- Shop By Collections Mega Dropdown -->
+<li class="relative nav-item-dropdown group py-1 cursor-pointer">
+<a class="hover:text-brand-dark flex items-center gap-1 transition-colors" href="#collections">
+            Shop By Collections
+            <i class="w-3 h-3 text-neutral-400 transition-transform group-hover:rotate-180" data-lucide="chevron-down"></i>
+</a>
+<!-- Mega Menu Dropdown -->
+<div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[760px] bg-white border border-brand-border shadow-xl opacity-0 invisible pointer-events-none p-8 z-50">
+<div class="grid grid-cols-3 gap-8">
+<div>
+<p class="text-[10px] font-semibold text-neutral-400 tracking-widest2 uppercase pb-3 mb-3 border-b border-brand-border">Collections</p>
+<div class="space-y-2.5">
+<a class="block text-xs normal-case text-neutral-700 hover:text-brand-accent transition-colors" href="#collections">New Collection 2025</a>
+<a class="block text-xs normal-case text-neutral-700 hover:text-brand-accent transition-colors" href="#collections">Flowers In A Box (Cubo &amp; Ronde)</a>
+<a class="block text-xs normal-case text-neutral-700 hover:text-brand-accent transition-colors" href="#collections">Flowers In A Vase</a>
+<a class="block text-xs normal-case text-neutral-700 hover:text-brand-accent transition-colors" href="#collections">Artisanal Hand-Tied Bunches</a>
+<a class="block text-xs normal-case text-neutral-700 hover:text-brand-accent transition-colors font-medium text-brand-dark" href="#collections">The Luxury Crystal Edit</a>
+</div>
+</div>
+<div>
+<p class="text-[10px] font-semibold text-neutral-400 tracking-widest2 uppercase pb-3 mb-3 border-b border-brand-border">Featured Essence</p>
+<div class="space-y-2.5">
+<a class="block text-xs normal-case text-neutral-700 hover:text-brand-accent" href="#collections">Ecuadorian Preserved Roses</a>
+<a class="block text-xs normal-case text-neutral-700 hover:text-brand-accent" href="#collections">Fresh Holland Peonies &amp; Ranunculus</a>
+<a class="block text-xs normal-case text-neutral-700 hover:text-brand-accent" href="#collections">Lilies &amp; Wild Hydrangeas</a>
+<a class="block text-xs normal-case text-neutral-700 hover:text-brand-accent" href="#collections">Seasonal Orchids</a>
+</div>
+</div>
+<div class="bg-brand-surface p-4 border border-brand-border">
+<span class="text-[9px] uppercase tracking-widest text-brand-accent block mb-1">Editor's Choice</span>
+<h4 class="font-serif text-sm text-brand-dark mb-2">Wild Mix Signature Box</h4>
+<p class="text-[11px] normal-case text-neutral-500 leading-relaxed mb-3">Freshly cut daily and arranged in handcrafted textured round keepsake boxes.</p>
+<a class="text-[10px] font-medium tracking-widest uppercase text-brand-dark underline underline-offset-4" href="#tabbed-carousel">Discover Now</a>
+</div>
+</div>
+</div>
+</li>
+<li><a class="hover:text-brand-dark transition-colors" href="#">Home</a></li>
+<!-- Shop By Occasions Dropdown -->
+<li class="relative nav-item-dropdown group py-1 cursor-pointer">
+<a class="hover:text-brand-dark flex items-center gap-1 transition-colors" href="#occasions">
+            Shop By Occasions
+            <i class="w-3 h-3 text-neutral-400 transition-transform group-hover:rotate-180" data-lucide="chevron-down"></i>
+</a>
+<div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[480px] bg-white border border-brand-border shadow-xl opacity-0 invisible pointer-events-none p-6 z-50">
+<div class="grid grid-cols-2 gap-6">
+<div>
+<p class="text-[10px] font-semibold text-neutral-400 tracking-widest2 uppercase pb-2 mb-2 border-b border-brand-border">Moments</p>
+<ul class="space-y-2">
+<li><a class="text-xs normal-case text-neutral-700 hover:text-brand-accent" href="#collections">Birthday Flowers</a></li>
+<li><a class="text-xs normal-case text-neutral-700 hover:text-brand-accent" href="#collections">Anniversary Flowers</a></li>
+<li><a class="text-xs normal-case text-neutral-700 hover:text-brand-accent" href="#collections">Love &amp; Romance</a></li>
+<li><a class="text-xs normal-case text-neutral-700 hover:text-brand-accent font-medium" href="#collections">Festive Collection</a></li>
+</ul>
+</div>
+<div class="flex flex-col justify-between border-l border-brand-border pl-6">
+<div>
+<p class="text-[10px] font-semibold text-neutral-400 tracking-widest2 uppercase pb-2 mb-2 border-b border-brand-border">Express Concierge</p>
+<p class="text-xs normal-case text-neutral-500 mb-3">Custom flower arrangements and bespoke event floral styling.</p>
+</div>
+<a class="text-[10px] uppercase tracking-widest text-brand-dark underline underline-offset-4" href="#footer">Talk to a Florist</a>
+</div>
+</div>
+</div>
+</li>
+<!-- Floral Decor -->
+<li><a class="hover:text-brand-dark transition-colors" href="#poetry-section">Floral Decor</a></li>
+<!-- Choose Your City Dropdown -->
+<li class="relative nav-item-dropdown group py-1 cursor-pointer">
+<a class="hover:text-brand-dark flex items-center gap-1 transition-colors" href="#cities">
+            Choose Your City
+            <i class="w-3 h-3 text-neutral-400 transition-transform group-hover:rotate-180" data-lucide="chevron-down"></i>
+</a>
+<div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[340px] bg-white border border-brand-border shadow-xl opacity-0 invisible pointer-events-none p-5 z-50">
+<p class="text-[10px] font-semibold text-neutral-400 tracking-widest2 uppercase pb-2 mb-2 border-b border-brand-border">Available Hubs for Same-Day</p>
+<div class="space-y-2 text-xs normal-case text-neutral-800">
+<a class="flex items-center justify-between p-1.5 hover:bg-neutral-50 transition-colors" href="#tabbed-carousel">
+<span>Delhi NCR</span>
+<span class="text-[10px] text-brand-accent uppercase tracking-wider">3-hr Delivery</span>
+</a>
+<a class="flex items-center justify-between p-1.5 hover:bg-neutral-50 transition-colors" href="#tabbed-carousel">
+<span>Mumbai</span>
+<span class="text-[10px] text-brand-accent uppercase tracking-wider">Same Day</span>
+</a>
+<a class="flex items-center justify-between p-1.5 hover:bg-neutral-50 transition-colors" href="#tabbed-carousel">
+<span>Pune</span>
+<span class="text-[10px] text-brand-accent uppercase tracking-wider">Same Day</span>
+</a>
+<a class="flex items-center justify-between p-1.5 hover:bg-neutral-50 transition-colors" href="#tabbed-carousel">
+<span>Navi Mumbai / Thane</span>
+<span class="text-[10px] text-brand-accent uppercase tracking-wider">Express</span>
+</a>
+</div>
+</div>
+</li>
+</ul>
+</nav>
+</header>
+<!-- ========================================================
+       MOBILE DRAWER (Accordion Navigation + Currency + Social)
+       ======================================================== -->
+<div class="fixed inset-0 z-50 pointer-events-none transition-all" id="mobile-drawer">
+<div class="drawer-overlay absolute inset-0 bg-black/40 opacity-0 transition-opacity" id="mobile-backdrop" onclick="toggleMobileMenu(false)"></div>
+<div class="drawer-panel absolute top-0 left-0 bottom-0 w-[310px] max-w-[85vw] bg-white flex flex-col justify-between -translate-x-full border-r border-brand-border shadow-2xl overflow-y-auto" id="mobile-panel">
+<div>
+<!-- Drawer Header -->
+<div class="p-5 flex items-center justify-between border-b border-brand-border">
+<span class="font-serif text-lg tracking-[0.16em] uppercase">Bloom &amp; Box</span>
+<button class="text-brand-dark p-1" onclick="toggleMobileMenu(false)">
+<i class="w-5 h-5" data-lucide="x"></i>
+</button>
+</div>
+<!-- Accordion Links -->
+<div class="p-5 divide-y divide-brand-border/60 text-xs uppercase tracking-widest text-neutral-800">
+<div class="py-3">
+<details class="group cursor-pointer">
+<summary class="flex justify-between items-center list-none font-medium">
+<span>Shop By Collections</span>
+<i class="w-4 h-4 transition-transform group-open:rotate-180" data-lucide="chevron-down"></i>
+</summary>
+<div class="pl-3 pt-3 space-y-2 text-[11px] normal-case text-neutral-600">
+<a class="block" href="#collections" onclick="toggleMobileMenu(false)">New Collection</a>
+<a class="block" href="#collections" onclick="toggleMobileMenu(false)">Flowers In A Box</a>
+<a class="block" href="#collections" onclick="toggleMobileMenu(false)">Flowers In A Vase</a>
+<a class="block" href="#collections" onclick="toggleMobileMenu(false)">Bunches</a>
+<a class="block font-medium text-brand-dark" href="#collections" onclick="toggleMobileMenu(false)">Luxury</a>
+</div>
+</details>
+</div>
+<div class="py-3">
+<a class="block font-medium" href="#" onclick="toggleMobileMenu(false)">Home</a>
+</div>
+<div class="py-3">
+<details class="group cursor-pointer">
+<summary class="flex justify-between items-center list-none font-medium">
+<span>Shop By Occasions</span>
+<i class="w-4 h-4 transition-transform group-open:rotate-180" data-lucide="chevron-down"></i>
+</summary>
+<div class="pl-3 pt-3 space-y-2 text-[11px] normal-case text-neutral-600">
+<a class="block" href="#occasions" onclick="toggleMobileMenu(false)">Birthday Flowers</a>
+<a class="block" href="#occasions" onclick="toggleMobileMenu(false)">Anniversary Flowers</a>
+<a class="block" href="#occasions" onclick="toggleMobileMenu(false)">Love &amp; Romance</a>
+<a class="block" href="#occasions" onclick="toggleMobileMenu(false)">Festive Collection</a>
+</div>
+</details>
+</div>
+<div class="py-3">
+<a class="block font-medium" href="#poetry-section" onclick="toggleMobileMenu(false)">Floral Decor</a>
+</div>
+<div class="py-3">
+<details class="group cursor-pointer">
+<summary class="flex justify-between items-center list-none font-medium">
+<span>Choose Your City</span>
+<i class="w-4 h-4 transition-transform group-open:rotate-180" data-lucide="chevron-down"></i>
+</summary>
+<div class="pl-3 pt-3 space-y-2 text-[11px] normal-case text-neutral-600">
+<a class="block" href="#cities" onclick="toggleMobileMenu(false)">Delhi NCR</a>
+<a class="block" href="#cities" onclick="toggleMobileMenu(false)">Pune</a>
+<a class="block" href="#cities" onclick="toggleMobileMenu(false)">Mumbai</a>
+<a class="block" href="#cities" onclick="toggleMobileMenu(false)">Navi Mumbai / Thane</a>
+</div>
+</details>
+</div>
+</div>
+</div>
+<!-- Drawer Footer: Currency & Social -->
+<div class="p-5 border-t border-brand-border bg-brand-surface space-y-4">
+<div>
+<label class="block text-[10px] uppercase tracking-widest text-neutral-400 mb-1.5">Select Currency</label>
+<select class="w-full bg-white border border-brand-border p-2 text-xs uppercase tracking-wider focus:outline-none" id="mobile-currency-select">
+<option value="INR">INR (₹)</option>
+<option value="USD">USD ($)</option>
+<option value="CAD">CAD (CA$)</option>
+<option value="EUR">EUR (€)</option>
+<option value="GBP">GBP (£)</option>
+</select>
+</div>
+<div class="flex items-center justify-around pt-2 text-neutral-600">
+<a class="flex items-center gap-1 text-[11px]" href="#"><i class="w-4 h-4" data-lucide="facebook"></i> Facebook</a>
+<a class="flex items-center gap-1 text-[11px]" href="#"><i class="w-4 h-4" data-lucide="instagram"></i> Instagram</a>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================================
+       CART SLIDE-OUT DRAWER (Right Side)
+       ======================================================== -->
+<div class="fixed inset-0 z-50 pointer-events-none" id="cart-drawer">
+<div class="drawer-overlay absolute inset-0 bg-black/40 opacity-0 transition-opacity" id="cart-backdrop" onclick="toggleCart(false)"></div>
+<div class="drawer-panel absolute top-0 right-0 bottom-0 w-[380px] max-w-[92vw] bg-white border-l border-brand-border shadow-2xl flex flex-col justify-between translate-x-full" id="cart-panel">
+<!-- Cart Header -->
+<div class="p-5 border-b border-brand-border flex items-center justify-between">
+<div class="flex items-center gap-2">
+<h3 class="font-serif text-lg tracking-wider uppercase text-brand-dark">Your Bag</h3>
+<span class="text-xs text-neutral-400 font-sans">(<span class="cart-count-badge">1</span>)</span>
+</div>
+<button class="text-brand-dark p-1 hover:opacity-70" onclick="toggleCart(false)">
+<i class="w-5 h-5" data-lucide="x"></i>
+</button>
+</div>
+<!-- Cart Item Container -->
+<div class="flex-1 overflow-y-auto p-5" id="cart-body">
+<!-- Empty State -->
+<div class="hidden text-center py-16" id="cart-empty-state">
+<i class="w-10 h-10 mx-auto text-neutral-300 stroke-[1] mb-3" data-lucide="shopping-bag"></i>
+<p class="font-serif text-base text-brand-dark">Your cart is empty</p>
+<p class="text-xs text-neutral-500 mt-1 mb-6">Explore our fresh botanical creations.</p>
+<button class="btn-luxury text-[10px]" onclick="toggleCart(false)">Shop Best Sellers</button>
+</div>
+<!-- Populated State -->
+<div id="cart-items-container">
+<!-- Populated by JS -->
+</div>
+</div>
+<!-- Cart Footer -->
+<div class="p-5 border-t border-brand-border bg-brand-surface space-y-3" id="cart-footer">
+<div class="flex items-center justify-between text-xs tracking-wider uppercase">
+<span class="text-neutral-500">Subtotal</span>
+<span class="font-semibold text-brand-dark font-sans" id="cart-subtotal-val">Rs. 2,800</span>
+</div>
+<p class="text-[10px] text-neutral-400">Taxes, luxury greeting card &amp; courier delivery calculated at checkout.</p>
+<button class="btn-luxury w-full py-3.5 bg-brand-dark text-white hover:bg-neutral-800 tracking-[0.2em]" onclick="alert('Proceeding to Checkout with Stripe/Razorpay integration.')">
+          Checkout Now
+        </button>
+<button class="w-full text-center text-[10px] uppercase tracking-widest text-neutral-500 hover:text-black pt-1" onclick="toggleCart(false)">
+          Continue Shopping
+        </button>
+</div>
+</div>
+</div>
+<!-- ========================================================
+       LIVE SEARCH SUGGESTIONS MODAL
+       ======================================================== -->
+<div class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-start justify-center pt-20 px-4" id="search-modal">
+<div class="bg-white max-w-2xl w-full border border-brand-border p-6 shadow-2xl relative">
+<button class="absolute top-5 right-5 text-neutral-400 hover:text-black" onclick="toggleSearchModal(false)">
+<i class="w-5 h-5" data-lucide="x"></i>
+</button>
+<h3 class="font-serif text-lg tracking-wider text-brand-dark uppercase mb-3">Search Bloom &amp; Box</h3>
+<div class="relative border-b border-brand-dark pb-2">
+<input class="w-full text-sm font-sans tracking-wide focus:outline-none placeholder:text-neutral-400 pr-8" id="search-input" placeholder="Type roses, cubo, vase, anniversary..." type="text"/>
+<i class="w-4 h-4 absolute right-0 top-1 text-neutral-400" data-lucide="search"></i>
+</div>
+<div class="mt-4">
+<p class="text-[10px] uppercase tracking-widest text-neutral-400 mb-2">Suggested Searches</p>
+<div class="flex flex-wrap gap-2">
+<button class="text-xs bg-neutral-100 hover:bg-neutral-200 px-3 py-1 text-neutral-700" onclick="document.getElementById('search-input').value='Classic Cubo'; toggleSearchModal(false);">Classic Cubo</button>
+<button class="text-xs bg-neutral-100 hover:bg-neutral-200 px-3 py-1 text-neutral-700" onclick="document.getElementById('search-input').value='Grande Ronde'; toggleSearchModal(false);">Grande Ronde</button>
+<button class="text-xs bg-neutral-100 hover:bg-neutral-200 px-3 py-1 text-neutral-700" onclick="document.getElementById('search-input').value='Crystal Grande'; toggleSearchModal(false);">Crystal Grande</button>
+<button class="text-xs bg-neutral-100 hover:bg-neutral-200 px-3 py-1 text-neutral-700" onclick="document.getElementById('search-input').value='Anniversary Flowers'; toggleSearchModal(false);">Anniversary</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================================
+       HOME PAGE SECTIONS (EXACT REQUEST ORDER)
+       ======================================================== -->
+<main class="flex-1">
+<!-- 1. HERO SLIDER (Full-width, Autoplay, Dots/Arrows, Desktop & Mobile Images) -->
+<section class="relative w-full overflow-hidden bg-neutral-900 h-[70vh] sm:h-[80vh] lg:h-[88vh]" id="hero-slider">
+<!-- Slide 1 -->
+<div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100 z-10">
+<!-- Desktop Image -->
+<img alt="The Bloom Edit - Desktop" class="hidden sm:block w-full h-full object-cover brightness-[0.82]" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- Mobile Image -->
+<img alt="The Bloom Edit - Mobile" class="sm:hidden w-full h-full object-cover brightness-[0.78]" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- Content Overlay -->
+<div class="absolute inset-0 bg-black/25 flex flex-col items-center justify-center text-center px-4">
+<span class="text-white/80 text-[10px] sm:text-xs uppercase tracking-[0.3em] font-light mb-3">Atelier Botanique Exclusives</span>
+<h2 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal text-white tracking-wide max-w-2xl leading-tight">
+            The Bloom Edit
+          </h2>
+<p class="text-white/80 text-xs sm:text-sm max-w-md font-light tracking-wide mt-3 mb-6">
+            Architectural floral silhouettes nestled in bespoke keepsake hatboxes.
+          </p>
+<a class="btn-luxury-inverted" href="#tabbed-carousel">Shop Now</a>
+</div>
+</div>
+<!-- Slide 2 -->
+<div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+<!-- Desktop Image -->
+<img alt="New Collection - Desktop" class="hidden sm:block w-full h-full object-cover brightness-[0.8]" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- Mobile Image -->
+<img alt="New Collection - Mobile" class="sm:hidden w-full h-full object-cover brightness-[0.75]" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-black/25 flex flex-col items-center justify-center text-center px-4">
+<span class="text-white/80 text-[10px] sm:text-xs uppercase tracking-[0.3em] font-light mb-3">Autumn / Winter Release</span>
+<h2 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal text-white tracking-wide max-w-2xl leading-tight">
+            New Collection
+          </h2>
+<p class="text-white/80 text-xs sm:text-sm max-w-md font-light tracking-wide mt-3 mb-6">
+            Hand-picked Ecuadorian garden roses in hand-blown crystal containers.
+          </p>
+<a class="btn-luxury-inverted" href="#category-tiles">Shop Now</a>
+</div>
+</div>
+<!-- Slider Arrows -->
+<button aria-label="Previous Slide" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 text-white/80 hover:text-white p-2 border border-white/20 hover:border-white/60 transition-all bg-black/10 backdrop-blur-sm" onclick="prevHeroSlide()">
+<i class="w-5 h-5" data-lucide="chevron-left"></i>
+</button>
+<button aria-label="Next Slide" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 text-white/80 hover:text-white p-2 border border-white/20 hover:border-white/60 transition-all bg-black/10 backdrop-blur-sm" onclick="nextHeroSlide()">
+<i class="w-5 h-5" data-lucide="chevron-right"></i>
+</button>
+<!-- Slider Dots -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
+<button class="hero-dot w-2 h-2 rounded-full bg-white transition-all" onclick="goToHeroSlide(0)"></button>
+<button class="hero-dot w-2 h-2 rounded-full bg-white/40 hover:bg-white transition-all" onclick="goToHeroSlide(1)"></button>
+</div>
+</section>
+<!-- 2. SHOP BY COLLECTION BANNER (Full-width image, "Shop by", "Collection" link button) -->
+<section class="relative w-full h-80 sm:h-96 overflow-hidden">
+<img alt="Botanical Collection Banner" class="w-full h-full object-cover brightness-[0.78]" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-neutral-900/30 flex flex-col items-center justify-center text-center p-6">
+<span class="text-white/90 text-xs uppercase tracking-[0.3em] font-light mb-1">Curated Expressions</span>
+<h3 class="font-serif text-3xl sm:text-5xl text-white font-normal tracking-wider mb-6">
+          Shop by
+        </h3>
+<a class="btn-luxury-inverted" href="#tabbed-carousel">
+          Collection
+        </a>
+</div>
+</section>
+<!-- 3. TABBED PRODUCT CAROUSEL ("Best Sellers" | "Add Ons", 4 Desktop / 2 Mobile, 12 Products) -->
+<section class="py-16 sm:py-20 px-4 sm:px-8 max-w-7xl mx-auto" id="tabbed-carousel">
+<!-- Section Header & Tabs -->
+<div class="flex flex-col items-center text-center mb-10">
+<span class="text-[10px] uppercase tracking-widest2 text-neutral-400 mb-2">Our Signature Creations</span>
+<div class="flex items-center space-x-8 border-b border-brand-border pb-1">
+<button class="font-serif text-xl sm:text-2xl tracking-wide text-brand-dark pb-2 border-b-2 border-brand-dark transition-all" id="tab-bestsellers" onclick="switchProductTab('bestseller')">
+            Best Sellers
+          </button>
+<button class="font-serif text-xl sm:text-2xl tracking-wide text-neutral-400 pb-2 border-b-2 border-transparent hover:text-brand-dark transition-all" id="tab-addons" onclick="switchProductTab('addon')">
+            Add Ons
+          </button>
+</div>
+</div>
+<!-- Carousel Container with Arrows -->
+<div class="relative group/carousel">
+<!-- Navigation Buttons -->
+<button aria-label="Scroll left" class="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 bg-white border border-brand-border flex items-center justify-center shadow-md hover:bg-neutral-50 transition-all opacity-90 hover:opacity-100" onclick="scrollCarousel(-1)">
+<i class="w-4 h-4 text-brand-dark" data-lucide="chevron-left"></i>
+</button>
+<button aria-label="Scroll right" class="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 bg-white border border-brand-border flex items-center justify-center shadow-md hover:bg-neutral-50 transition-all opacity-90 hover:opacity-100" onclick="scrollCarousel(1)">
+<i class="w-4 h-4 text-brand-dark" data-lucide="chevron-right"></i>
+</button>
+<!-- Carousel Track -->
+<div class="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth no-scrollbar py-2 px-1" id="carousel-track">
+<!-- Rendered via JS -->
+</div>
+</div>
+<!-- View All Button -->
+<div class="text-center mt-12">
+<a class="btn-luxury" href="#collections">
+          View all products
+        </a>
+</div>
+</section>
+<!-- 4. THREE-COLUMN CATEGORY TILES (Classic Cubo, Classic Ronde, Crystal Grande) -->
+<section class="py-12 px-4 sm:px-8 max-w-7xl mx-auto border-t border-brand-border" id="category-tiles">
+<div class="text-center mb-8">
+<span class="text-[10px] uppercase tracking-widest2 text-neutral-400">Curated Silhouettes</span>
+<h3 class="font-serif text-2xl sm:text-3xl text-brand-dark mt-1">Sculptural Vessels</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+<!-- Tile 1: Classic Cubo -->
+<div class="group relative overflow-hidden aspect-[3/4] bg-neutral-100 border border-brand-border">
+<img alt="Classic Cubo Box" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-6 text-white text-center">
+<span class="text-[10px] uppercase tracking-[0.2em] text-white/80 mb-1">Square Atelier Box</span>
+<h4 class="font-serif text-2xl font-normal mb-3">Classic Cubo</h4>
+<a class="text-[11px] uppercase tracking-widest text-white underline underline-offset-4 hover:text-brand-accent transition-colors" href="#tabbed-carousel">
+              Shop Now →
+            </a>
+</div>
+</div>
+<!-- Tile 2: Classic Ronde -->
+<div class="group relative overflow-hidden aspect-[3/4] bg-neutral-100 border border-brand-border">
+<img alt="Classic Ronde Hatbox" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-6 text-white text-center">
+<span class="text-[10px] uppercase tracking-[0.2em] text-white/80 mb-1">Signature Circular Box</span>
+<h4 class="font-serif text-2xl font-normal mb-3">Classic Ronde</h4>
+<a class="text-[11px] uppercase tracking-widest text-white underline underline-offset-4 hover:text-brand-accent transition-colors" href="#tabbed-carousel">
+              Shop Now →
+            </a>
+</div>
+</div>
+<!-- Tile 3: Crystal Grande -->
+<div class="group relative overflow-hidden aspect-[3/4] bg-neutral-100 border border-brand-border">
+<img alt="Crystal Grande Glass Vessel" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-6 text-white text-center">
+<span class="text-[10px] uppercase tracking-[0.2em] text-white/80 mb-1">Hand-Cut Crystal Vase</span>
+<h4 class="font-serif text-2xl font-normal mb-3">Crystal Grande</h4>
+<a class="text-[11px] uppercase tracking-widest text-white underline underline-offset-4 hover:text-brand-accent transition-colors" href="#tabbed-carousel">
+              Shop Now →
+            </a>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. BRAND STORY (Centered Text Block, "Our Story", 2 Original Paragraphs, Decorative Divider) -->
+<section class="py-20 sm:py-24 px-4 bg-brand-surface border-y border-brand-border">
+<div class="max-w-2xl mx-auto text-center">
+<span class="text-[10px] uppercase tracking-[0.28em] text-brand-accent font-medium">The Philosophy</span>
+<h3 class="font-serif text-3xl sm:text-4xl text-brand-dark mt-2 mb-4 font-normal">Our Story</h3>
+<!-- Decorative Divider -->
+<div class="flex items-center justify-center space-x-4 my-6">
+<div class="h-[1px] w-12 bg-neutral-300"></div>
+<svg class="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z"></path>
+</svg>
+<div class="h-[1px] w-12 bg-neutral-300"></div>
+</div>
+<p class="font-cormorant text-lg sm:text-xl text-neutral-700 italic leading-relaxed mb-6 font-light">
+          Bloom &amp; Box was born from a singular reverie: that botanical gifting ought to be an unforgettable artistic ritual rather than a transient courtesy. Each stem is meticulously curated from sustainable ethical growers across Holland and Ecuador, harvested at peak vitality, and shaped by master florists into enduring architectural arrangements.
+        </p>
+<p class="text-xs sm:text-[13px] text-neutral-600 leading-relaxed font-sans font-light tracking-wide">
+          Whether marking milestone unions, intimate reconciliations, or spontaneous declarations of affection, our bespoke packaging preserves tactile elegance and delicate floral perfume. Gifting is not merely the conveyance of blossoms; it is the artful punctuation of human connection.
+        </p>
+</div>
+</section>
+<!-- 6. "POETRY IN A BOX" SECTION (Two-column Split, Large Image, Paragraph, #PoetryInABox, "About" Button) -->
+<section class="py-16 sm:py-24 px-4 sm:px-8 max-w-7xl mx-auto" id="poetry-section">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+<!-- Side A: Large Image -->
+<div class="relative aspect-square sm:aspect-[4/3] lg:aspect-square overflow-hidden border border-brand-border shadow-sm">
+<img alt="Poetry in a Box Craftsmanship" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-2 border border-brand-border text-[10px] uppercase tracking-widest text-brand-dark">
+            Hand-Crafted in Atelier
+          </div>
+</div>
+<!-- Side B: Content Split -->
+<div class="flex flex-col justify-center items-start lg:pl-6">
+<span class="text-[10px] uppercase tracking-widest2 text-neutral-400 mb-2">Artisanal Dedication</span>
+<h3 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-brand-dark leading-tight mb-5">
+            Poetry In A Box
+          </h3>
+<p class="text-neutral-600 text-xs sm:text-sm leading-relaxed mb-6 font-light">
+            Every arrangement embodies an unscripted verse. Inside our custom heavyweight Parisian-finish boxes, moisture-locking botanical cushions protect fragile petals while concealed water reserves keep your arrangements radiant for days. It is an elevated unboxing experience meticulously orchestrated to evoke wonder.
+          </p>
+<div class="text-xs font-mono tracking-widest text-brand-accent uppercase mb-8">
+            #PoetryInABox
+          </div>
+<a class="btn-luxury" href="#about-modal" onclick="alert('About Bloom &amp; Box: Founded in 2021 as a contemporary floral atelier committed to ethical sourcing, plastic-free botanicals, and bespoke floral architecture.')">
+            About
+          </a>
+</div>
+</div>
+</section>
+<!-- 7. FEATURED PRODUCTS (Big Featured Image Left, 3 Products Right with "View this product") -->
+<section class="py-16 sm:py-20 px-4 sm:px-8 max-w-7xl mx-auto border-t border-brand-border">
+<div class="mb-10 text-center lg:text-left">
+<span class="text-[10px] uppercase tracking-widest2 text-neutral-400">Atelier Spotlight</span>
+<h3 class="font-serif text-2xl sm:text-3xl text-brand-dark mt-1">Featured Creations</h3>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Big Featured Image Left (5 cols) -->
+<div class="lg:col-span-5 relative aspect-[4/5] overflow-hidden border border-brand-border bg-neutral-100">
+<img alt="Featured Obsidian Ronde Arrangement" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+<span class="text-[10px] uppercase tracking-widest text-brand-accent">Exclusive Edition</span>
+<h4 class="font-serif text-2xl font-normal">Noir &amp; Rouge Symphony</h4>
+<p class="text-xs text-neutral-300 mt-1">Dark velvet garden roses nestled with eucalyptus and wild berries.</p>
+</div>
+</div>
+<!-- 3 Products on the Right (7 cols) -->
+<div class="lg:col-span-7 divide-y divide-brand-border border-y lg:border-t-0 border-brand-border">
+<!-- Item 1 -->
+<div class="py-6 flex flex-col sm:flex-row items-center gap-6 group">
+<img alt="Wild Mix" class="w-24 h-28 object-cover border border-brand-border flex-shrink-0" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="flex-1 text-center sm:text-left">
+<span class="text-[9px] uppercase tracking-widest text-neutral-400">Box Arrangement</span>
+<h4 class="font-serif text-lg text-brand-dark">Wild Mix – Classic Cubo</h4>
+<p class="text-xs text-neutral-500 mt-1" data-inr-price="2800" data-price-prefix="From ">From Rs. 2,800</p>
+</div>
+<button class="btn-luxury text-[10px] py-2.5 px-4 whitespace-nowrap" onclick="addToCart('p1')">
+              View this product
+            </button>
+</div>
+<!-- Item 2 -->
+<div class="py-6 flex flex-col sm:flex-row items-center gap-6 group">
+<img alt="Vibrant Grande" class="w-24 h-28 object-cover border border-brand-border flex-shrink-0" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="flex-1 text-center sm:text-left">
+<span class="text-[9px] uppercase tracking-widest text-neutral-400">Hatbox Collection</span>
+<h4 class="font-serif text-lg text-brand-dark">Vibrant – Grande Ronde</h4>
+<p class="text-xs text-neutral-500 mt-1" data-inr-price="3400" data-price-prefix="From ">From Rs. 3,400</p>
+</div>
+<button class="btn-luxury text-[10px] py-2.5 px-4 whitespace-nowrap" onclick="addToCart('p2')">
+              View this product
+            </button>
+</div>
+<!-- Item 3 -->
+<div class="py-6 flex flex-col sm:flex-row items-center gap-6 group">
+<img alt="Ruby Opulence" class="w-24 h-28 object-cover border border-brand-border flex-shrink-0" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="flex-1 text-center sm:text-left">
+<span class="text-[9px] uppercase tracking-widest text-neutral-400">Crystal Vessel</span>
+<h4 class="font-serif text-lg text-brand-dark">Ruby Opulence – Crystal Grande</h4>
+<p class="text-xs text-neutral-500 mt-1" data-inr-price="4200" data-price-prefix="From ">From Rs. 4,200</p>
+</div>
+<button class="btn-luxury text-[10px] py-2.5 px-4 whitespace-nowrap" onclick="addToCart('p4')">
+              View this product
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. SHOP THE LOOK (Lifestyle Photo with 3 Clickable Hotspots, Product Popup & Adjacent Product List) -->
+<section class="py-16 sm:py-24 px-4 sm:px-8 max-w-7xl mx-auto border-t border-brand-border bg-brand-surface/40">
+<div class="text-center mb-10">
+<span class="text-[10px] uppercase tracking-widest2 text-neutral-400">Interior Styling</span>
+<h3 class="font-serif text-2xl sm:text-3xl text-brand-dark mt-1">Shop the Look</h3>
+<p class="text-xs text-neutral-500 mt-1">Click the active markers on the scene to inspect each handcrafted piece.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<!-- Interactive Lifestyle Photo with 3 Hotspots (7 cols) -->
+<div class="lg:col-span-7 relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden border border-brand-border shadow-md">
+<img alt="Styled Living Room Lifestyle" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- Hotspot 1: Coffee Table Centerpiece -->
+<div class="absolute top-[52%] left-[46%] -translate-x-1/2 -translate-y-1/2 z-20">
+<button aria-label="Hotspot 1" class="relative flex items-center justify-center w-8 h-8 rounded-full bg-white/95 text-brand-dark shadow-lg hover:scale-110 transition-transform focus:outline-none" onclick="openHotspot(1)">
+<span class="hotspot-ring absolute inset-0 rounded-full border border-white"></span>
+<span class="text-xs font-bold font-sans">+</span>
+</button>
+</div>
+<!-- Hotspot 2: Side Table Scent Candle -->
+<div class="absolute top-[68%] left-[24%] -translate-x-1/2 -translate-y-1/2 z-20">
+<button aria-label="Hotspot 2" class="relative flex items-center justify-center w-8 h-8 rounded-full bg-white/95 text-brand-dark shadow-lg hover:scale-110 transition-transform focus:outline-none" onclick="openHotspot(2)">
+<span class="hotspot-ring absolute inset-0 rounded-full border border-white"></span>
+<span class="text-xs font-bold font-sans">+</span>
+</button>
+</div>
+<!-- Hotspot 3: Mantle Ceramic Vase -->
+<div class="absolute top-[32%] right-[22%] -translate-x-1/2 -translate-y-1/2 z-20">
+<button aria-label="Hotspot 3" class="relative flex items-center justify-center w-8 h-8 rounded-full bg-white/95 text-brand-dark shadow-lg hover:scale-110 transition-transform focus:outline-none" onclick="openHotspot(3)">
+<span class="hotspot-ring absolute inset-0 rounded-full border border-white"></span>
+<span class="text-xs font-bold font-sans">+</span>
+</button>
+</div>
+<!-- Interactive Hotspot Popup Card -->
+<div class="hidden absolute bottom-5 left-5 right-5 sm:right-auto sm:w-80 bg-white border border-brand-border p-4 shadow-2xl z-30 transition-all" id="hotspot-popup">
+<div class="flex gap-3 items-center">
+<img alt="Popup product" class="w-16 h-16 object-cover border border-brand-border flex-shrink-0" id="hotspot-popup-img" src=""/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h5 class="font-serif text-sm text-brand-dark font-medium leading-tight" id="hotspot-popup-title">Product Title</h5>
+<button class="text-neutral-400 hover:text-black" onclick="closeHotspot()">
+<i class="w-3.5 h-3.5" data-lucide="x"></i>
+</button>
+</div>
+<p class="text-xs text-neutral-600 mt-1" id="hotspot-popup-price">Rs. 2,800</p>
+<button class="text-[10px] uppercase tracking-widest text-brand-accent underline underline-offset-2 mt-1.5 font-medium block" id="hotspot-popup-btn">
+                  Add to Cart
+                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Beside It: Product List of the Same 3 Items (5 cols) -->
+<div class="lg:col-span-5 bg-white border border-brand-border p-6 shadow-sm">
+<h4 class="font-serif text-lg text-brand-dark border-b border-brand-border pb-3 mb-4">
+            Items in this Vignette
+          </h4>
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="flex items-center gap-4 pb-4 border-b border-brand-border/60">
+<img alt="Wild Mix" class="w-16 h-16 object-cover border border-brand-border" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="flex-1">
+<span class="text-[9px] uppercase tracking-widest text-neutral-400">01. Focal Centerpiece</span>
+<h5 class="font-serif text-sm text-brand-dark">Wild Mix – Classic Cubo</h5>
+<p class="text-xs text-neutral-600" data-inr-price="2800">Rs. 2,800</p>
+</div>
+<button class="btn-luxury text-[9px] py-1.5 px-3" onclick="addToCart('p1')">Add</button>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-4 pb-4 border-b border-brand-border/60">
+<img alt="Soy Candle" class="w-16 h-16 object-cover border border-brand-border" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="flex-1">
+<span class="text-[9px] uppercase tracking-widest text-neutral-400">02. Atmosphere</span>
+<h5 class="font-serif text-sm text-brand-dark">Amber Noir Soy Candle</h5>
+<p class="text-xs text-neutral-600" data-inr-price="1200">Rs. 1,200</p>
+</div>
+<button class="btn-luxury text-[9px] py-1.5 px-3" onclick="addToCart('a2')">Add</button>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center gap-4">
+<img alt="Fluted Ceramic" class="w-16 h-16 object-cover border border-brand-border" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="flex-1">
+<span class="text-[9px] uppercase tracking-widest text-neutral-400">03. Mantle Accent</span>
+<h5 class="font-serif text-sm text-brand-dark">Muted Clay Fluted Mini Vase</h5>
+<p class="text-xs text-neutral-600" data-inr-price="1650">Rs. 1,650</p>
+</div>
+<button class="btn-luxury text-[9px] py-1.5 px-3" onclick="addToCart('a4')">Add</button>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-brand-border">
+<button class="btn-luxury w-full py-3" onclick="alert('Viewing Complete Lookbook with 12 lifestyle sets.')">
+              View products
+            </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- ========================================================
+       9. FOOTER (Three Columns: Resources, Connect with us, Newsletter; Bottom bar)
+       ======================================================== -->
+<footer class="bg-brand-surface border-t border-brand-border text-brand-dark pt-16 pb-8" id="footer">
+<div class="max-w-7xl mx-auto px-4 sm:px-8">
+<!-- 3 Main Columns -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 pb-14 border-b border-brand-border">
+<!-- Column 1: Resources -->
+<div>
+<h4 class="font-serif text-base tracking-widest uppercase mb-4 text-brand-dark">
+            Resources
+          </h4>
+<ul class="space-y-2.5 text-xs text-neutral-600 font-light tracking-wide">
+<li><a class="hover:text-black transition-colors" href="#terms" onclick="alert('Terms of Service: Bloom &amp; Box guarantees premium fresh condition upon arrival.')">Terms of Service</a></li>
+<li><a class="hover:text-black transition-colors" href="#refund" onclick="alert('Refund Policy: Same-day photo guarantee replacement or full credit within 24 hours.')">Refund Policy</a></li>
+<li><a class="hover:text-black transition-colors" href="#privacy" onclick="alert('Privacy Policy: End-to-end encrypted customer records.')">Privacy Policy</a></li>
+<li><a class="hover:text-black transition-colors" href="#contact" onclick="alert('Contact Atelier: concierge@bloomandbox.com | +91 (0) 11 4988 2000')">Contact Us</a></li>
+</ul>
+</div>
+<!-- Column 2: Connect with us -->
+<div>
+<h4 class="font-serif text-base tracking-widest uppercase mb-4 text-brand-dark">
+            Connect with us
+          </h4>
+<p class="text-xs text-neutral-600 font-light leading-relaxed mb-4">
+            Follow our daily botanical dispatch, unboxing rituals, and seasonal stem harvest.
+          </p>
+<div class="flex items-center space-x-4 text-brand-dark">
+<a aria-label="Instagram" class="w-8 h-8 rounded-full border border-brand-border flex items-center justify-center hover:bg-brand-dark hover:text-white transition-all" href="#">
+<i class="w-4 h-4" data-lucide="instagram"></i>
+</a>
+<a aria-label="Facebook" class="w-8 h-8 rounded-full border border-brand-border flex items-center justify-center hover:bg-brand-dark hover:text-white transition-all" href="#">
+<i class="w-4 h-4" data-lucide="facebook"></i>
+</a>
+<a aria-label="Pinterest" class="w-8 h-8 rounded-full border border-brand-border flex items-center justify-center hover:bg-brand-dark hover:text-white transition-all" href="#">
+<i class="w-4 h-4" data-lucide="pin"></i>
+</a>
+</div>
+</div>
+<!-- Column 3: Newsletter email signup -->
+<div>
+<h4 class="font-serif text-base tracking-widest uppercase mb-4 text-brand-dark">
+            Newsletter
+          </h4>
+<p class="text-xs text-neutral-600 font-light leading-relaxed mb-4">
+            Subscribe for private releases, seasonal floral care journals, and invitations.
+          </p>
+<form class="flex items-center" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Bloom &amp; Box Atelier.'); this.reset();">
+<input class="w-full bg-white border border-brand-border px-3 py-2.5 text-xs text-brand-dark placeholder:text-neutral-400 focus:outline-none focus:border-brand-dark" placeholder="Enter your email address" required="" type="email">
+<button class="btn-luxury py-2.5 px-4 -ml-[1px] whitespace-nowrap" type="submit">
+              Join
+            </button>
+</input></form>
+</div>
+</div>
+<!-- Bottom Bar: "© Bloom & Box" and "Powered by" text on the right -->
+<div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-neutral-500 font-light tracking-wide gap-3">
+<p>© <span id="current-year">2025</span> Bloom &amp; Box. All rights reserved.</p>
+<p class="text-neutral-400">Powered by Next.js &amp; Tailwind Atelier Engine</p>
+</div>
+</div>
+</footer>
+<!-- ========================================================
+       CLIENT INTERACTIVITY LOGIC (Carousel, Tabs, Hotspots, Currencies)
+       ======================================================== -->
+<script>
+    // 1. Hero Slider
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+
+    function showHeroSlide(index) {
+      slides.forEach((s, i) => {
+        if (i === index) {
+          s.classList.remove('opacity-0', 'z-0');
+          s.classList.add('opacity-100', 'z-10');
+        } else {
+          s.classList.remove('opacity-100', 'z-10');
+          s.classList.add('opacity-0', 'z-0');
+        }
+      });
+      dots.forEach((d, i) => {
+        if (i === index) {
+          d.classList.add('bg-white');
+          d.classList.remove('bg-white/40');
+        } else {
+          d.classList.remove('bg-white');
+          d.classList.add('bg-white/40');
+        }
+      });
+      currentSlide = index;
+    }
+
+    function nextHeroSlide() {
+      const next = (currentSlide + 1) % slides.length;
+      showHeroSlide(next);
+    }
+
+    function prevHeroSlide() {
+      const prev = (currentSlide - 1 + slides.length) % slides.length;
+      showHeroSlide(prev);
+    }
+
+    function goToHeroSlide(idx) {
+      showHeroSlide(idx);
+    }
+
+    setInterval(nextHeroSlide, 6500);
+
+    // 2. Tabbed Product Carousel Render
+    let currentTab = 'bestseller';
+
+    function renderCarousel(category) {
+      const track = document.getElementById('carousel-track');
+      const items = window.STORE_DATA.products.filter(p => p.category === category);
+      
+      track.innerHTML = items.map(p => `
+        <div class="product-card flex-shrink-0 w-[240px] sm:w-[270px] bg-white border border-brand-border p-3 flex flex-col justify-between group">
+          <div>
+            <div class="product-img-box relative w-full overflow-hidden bg-neutral-50 mb-3 border border-brand-border/40">
+              <span class="absolute top-2 left-2 z-10 bg-white/90 text-brand-dark text-[9px] uppercase tracking-wider px-2 py-0.5 font-medium">${p.tag}</span>
+              <img src="${p.img1}" alt="${p.name}" class="primary-img absolute inset-0 w-full h-full object-cover" />
+              <img src="${p.img2}" alt="${p.name} secondary" class="secondary-img absolute inset-0 w-full h-full object-cover" />
+            </div>
+            <h4 class="font-serif text-sm text-brand-dark group-hover:text-brand-accent transition-colors line-clamp-1">${p.name}</h4>
+            <p class="text-xs text-neutral-500 font-sans mt-1" data-inr-price="${p.price}" data-price-prefix="From ">
+              From ${formatPrice(p.price)}
+            </p>
+          </div>
+          <button onclick="addToCart('${p.id}')" class="btn-luxury w-full py-2 mt-3 text-[10px] tracking-widest">
+            Add to Bag
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function switchProductTab(cat) {
+      currentTab = cat;
+      const bTab = document.getElementById('tab-bestsellers');
+      const aTab = document.getElementById('tab-addons');
+      if (cat === 'bestseller') {
+        bTab.classList.add('border-brand-dark', 'text-brand-dark');
+        bTab.classList.remove('border-transparent', 'text-neutral-400');
+        aTab.classList.remove('border-brand-dark', 'text-brand-dark');
+        aTab.classList.add('border-transparent', 'text-neutral-400');
+      } else {
+        aTab.classList.add('border-brand-dark', 'text-brand-dark');
+        aTab.classList.remove('border-transparent', 'text-neutral-400');
+        bTab.classList.remove('border-brand-dark', 'text-brand-dark');
+        bTab.classList.add('border-transparent', 'text-neutral-400');
+      }
+      renderCarousel(cat);
+    }
+
+    function scrollCarousel(dir) {
+      const track = document.getElementById('carousel-track');
+      const scrollAmt = 280 * 2 * dir;
+      track.scrollBy({ left: scrollAmt, behavior: 'smooth' });
+    }
+
+    // 3. Hotspot Interaction
+    const hotspotData = {
+      1: {
+        title: "Wild Mix – Classic Cubo",
+        price: 2800,
+        img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=300&q=80",
+        id: "p1"
+      },
+      2: {
+        title: "Amber Noir Soy Candle",
+        price: 1200,
+        img: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=300&q=80",
+        id: "a2"
+      },
+      3: {
+        title: "Muted Clay Fluted Mini Vase",
+        price: 1650,
+        img: "https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&w=300&q=80",
+        id: "a4"
+      }
+    };
+
+    function openHotspot(num) {
+      const data = hotspotData[num];
+      if (!data) return;
+      const popup = document.getElementById('hotspot-popup');
+      document.getElementById('hotspot-popup-title').textContent = data.title;
+      document.getElementById('hotspot-popup-price').textContent = formatPrice(data.price);
+      document.getElementById('hotspot-popup-img').src = data.img;
+      document.getElementById('hotspot-popup-btn').onclick = () => { addToCart(data.id); closeHotspot(); };
+      popup.classList.remove('hidden');
+    }
+
+    function closeHotspot() {
+      document.getElementById('hotspot-popup').classList.add('hidden');
+    }
+
+    // 4. Currency Switcher Listener
+    document.getElementById('currency-select').addEventListener('change', (e) => {
+      window.STORE_DATA.currentCurrency = e.target.value;
+      document.getElementById('mobile-currency-select').value = e.target.value;
+      updateCurrencyDisplay();
+    });
+
+    document.getElementById('mobile-currency-select').addEventListener('change', (e) => {
+      window.STORE_DATA.currentCurrency = e.target.value;
+      document.getElementById('currency-select').value = e.target.value;
+      updateCurrencyDisplay();
+    });
+
+    // 5. Initializer
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+      renderCarousel('bestseller');
+      renderCartItems();
+    });
+  </script>
+</body>
+</html>
